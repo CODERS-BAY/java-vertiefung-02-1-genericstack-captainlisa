@@ -37,6 +37,18 @@ public class MyStackTest {
     }
 
     @Test
+    @DisplayName("Test that peek() shows you the top element")
+    public void testPeekDoesNotChangeStack() throws StackEmptyException {
+        MyStack<String> testStack = new MyStack<String>();
+        testStack.push("first");
+        testStack.push("second");
+        testStack.push("top element");
+        Assertions.assertEquals(3, testStack.getSizeOfStack());
+        testStack.peek();
+        Assertions.assertEquals(3, testStack.getSizeOfStack());
+    }
+
+    @Test
     @DisplayName("Test that peek() on an empty stack throws exception")
     public void testPeekWithEmptyStack() {
         MyStack<Boolean> testStack = new MyStack<Boolean>();
@@ -62,4 +74,28 @@ public class MyStackTest {
         Assertions.assertEquals(2, testStack.pop());
     }
 
+    @Test
+    @DisplayName("Test that pop() gives back the value of the top element")
+    public void testPopChangesSizeOfStack() throws StackEmptyException {
+        MyStack<Integer> testStack = new MyStack<Integer>();
+        Assertions.assertEquals(0, testStack.getSizeOfStack());
+        testStack.push(2);
+        Assertions.assertEquals(1, testStack.getSizeOfStack());
+    }
+
+    @Test
+    @DisplayName("Test that pop() gives back the value of the top element")
+    public void testPushAndPopCanFillAndEmptyAStackCompletely() throws StackEmptyException {
+        MyStack<Integer> testStack = new MyStack<Integer>();
+        testStack.push(2);
+        testStack.push(65);
+        testStack.push(345);
+        testStack.push(6);
+        Assertions.assertEquals(4, testStack.getSizeOfStack());
+        int stackSize = testStack.getSizeOfStack();
+        for (int i = 0; i < stackSize; i++) {
+            testStack.pop();
+        }
+        Assertions.assertEquals(0, testStack.getSizeOfStack());
+    }
 }
